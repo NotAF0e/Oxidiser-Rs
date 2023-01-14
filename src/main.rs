@@ -1,32 +1,42 @@
 // use egui::*;
-// use magic_crypt::{ new_magic_crypt, MagicCryptTrait };
 use std::{ fs::File, io::Read, str };
 use lz4_flex::{ compress_prepend_size, decompress_size_prepended };
 
 fn main() {
-    //let mc = new_magic_crypt!("magickey", 128);
-    //let base64 = mc.encrypt_str_to_base64(&file_contents);
+    if std::fs::metadata("test.oxid").is_ok() {
+        let mut oxidised = File::open("test.oxid").unwrap_or_else(|_e|
+            panic!("nurseryrhyme.txt not found!")
+        );
+        let mut oxidised_content = Vec::new();
+        oxidised.read_to_end(&mut oxidised_content).expect("Cannot read file");
 
-    //println!("{}", base64);
-    //println!("{}", mc.decrypt_base64_to_string(&base64).unwrap());
+        let unoxidised = decompress_size_prepended(&oxidised_content).unwrap();
 
-    // Opens file
-    let mut file = File::open("nurseryrhyme.txt").unwrap_or_else(|_e|
-        panic!("nurseryrhyme.txt not found!")
-    );
-    let mut file_content = String::new();
-    file.read_to_string(&mut file_content).expect("Cannot read file");
+        println!("{}", str::from_utf8(&unoxidised).unwrap());
 
-    // Turns file to bytes
-    let file_content_bytes = file_content.as_bytes();
-    
-    // Compresses file
-    let mut compressed = compress_prepend_size(file_content_bytes);
+        // Saves file
+        // std::fs::write("uncrompressed.txt", &mut unoxidised).expect("Unable to save file");
+    } else {
+        // Opens file
+        let mut f = File::open("nurseryrhyme.txt").unwrap_or_else(|_e|
+            panic!("nurseryrhyme.txt not found!")
+        );
+        let mut f_content = String::new();
+        f.read_to_string(&mut f_content).expect("Cannot read file");
 
-    // Saves file
-    std::fs::write("test.oxid", &mut compressed).expect("Unable to save file");
+        // Turns file to bytes
+        let f_content_bytes = f_content.as_bytes();
 
-    let uncompressed = decompress_size_prepended(&compressed).unwrap();
+        // Compresses file
+        let mut oxidised = compress_prepend_size(f_content_bytes);
 
-    println!("{}", str::from_utf8(&uncompressed).unwrap());
+        // Saves file
+        std::fs::write("test.oxid", &mut oxidised).expect("Unable to save file");
+        println!(
+            "Compressed file by {}%",
+            ((std::fs::metadata("test.oxid").unwrap().len() as f32) /
+                (std::fs::metadata("nurseryrhyme.txt").unwrap().len() as f32)) *
+                100.0
+        )
+    }
 }
