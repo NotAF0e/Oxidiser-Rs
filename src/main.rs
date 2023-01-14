@@ -19,7 +19,8 @@ fn main() {
 
     // Turns file to bytes
     let file_content_bytes = file_content.as_bytes();
-
+    
+    // Compresses file
     let mut compressed = compress_prepend_size(file_content_bytes);
 
     // Saves file
