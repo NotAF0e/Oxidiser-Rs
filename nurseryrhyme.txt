@@ -1,0 +1,38 @@
+One man went to mow,
+Went to mow a meadow,
+One man and his dog,
+Went to mow a meadow
+Two man went to mow,
+Went to mow a meadow,
+Two man,
+One man and his dog,
+Went to mow a meadow
+Three man went to mow,
+Went to mow a meadow,
+Three man, two man,
+One man and his dog,
+Went to mow a meadow
+Four man went to mow,
+Went to mow a meadow,
+Four man, three man,
+Two man,
+One man and his dog,
+Went to mow a meadow
+Five man went to mow,
+Went to mow a meadow,
+Five man, four man,
+Three man, two man,
+One man and his dog,
+Went to mow a meadow
+Six man went to mow,
+Went to mow a meadow,
+Six man, five man, four man,
+Three man, two man,
+One man and his dog,
+Went to mow a meadow
+Seven man went to mow,
+Went to mow a meadow,
+Seven man, six man,
+Five man, four man,
+Three man, two man,
+One man and his dog

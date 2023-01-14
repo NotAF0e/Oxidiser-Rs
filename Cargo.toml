@@ -1,5 +1,5 @@
 [package]
-name = "Oxidiser"
+name = "oxidiser"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 egui = "0.20.0"
+magic-crypt = "3.1.12"
+lz4_flex = { version = "0.9.3", default-features = false }
