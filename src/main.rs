@@ -10,12 +10,13 @@ fn main() {
         let mut oxidised_content = Vec::new();
         oxidised.read_to_end(&mut oxidised_content).expect("Cannot read file");
 
-        let unoxidised = decompress_size_prepended(&oxidised_content).unwrap();
+        let mut unoxidised = decompress_size_prepended(&oxidised_content).unwrap();
 
         println!("{}", str::from_utf8(&unoxidised).unwrap());
 
-        // Saves file
-        // std::fs::write("uncrompressed.txt", &mut unoxidised).expect("Unable to save file");
+        //Saves file
+        std::fs::write("uncrompressed.txt", &mut unoxidised).expect("Unable to save file");
+        println!("Uncrompressed file saved")
     } else {
         // Opens file
         let mut f = File::open("nurseryrhyme.txt").unwrap_or_else(|_e|
@@ -34,9 +35,11 @@ fn main() {
         std::fs::write("test.oxid", &mut oxidised).expect("Unable to save file");
         println!(
             "Compressed file by {}%",
-            ((std::fs::metadata("test.oxid").unwrap().len() as f32) /
-                (std::fs::metadata("nurseryrhyme.txt").unwrap().len() as f32)) *
-                100.0
-        )
+            100.0 -
+                ((std::fs::metadata("test.oxid").unwrap().len() as f32) /
+                    (std::fs::metadata("nurseryrhyme.txt").unwrap().len() as f32)) *
+                    100.0
+        );
+        println!("Compressed file saved");
     }
 }
