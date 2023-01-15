@@ -7,5 +7,7 @@ edition = "2021"
 
 [dependencies]
 egui = "0.20.0"
+eframe = "0.20.0"
 magic-crypt = "3.1.12"
 lz4_flex = { version = "0.9.3", default-features = false }
+wfd = "0.1.7"
