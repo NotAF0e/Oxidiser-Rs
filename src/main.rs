@@ -28,8 +28,10 @@ fn main() {
                     // Button which opens dialog for files to be oxidised(compressed)
                     if ui.button("Oxidise").clicked() {
                         // Stores dialog for all types of files
-                        let unoxid_dialog = wfd::open_dialog(Default::default());
-
+                        let unoxid_dialog = wfd::open_dialog(wfd::DialogParams {
+                            file_types: vec![("Text Files", "*.txt")],
+                            ..Default::default()
+                        });
                         if unoxid_dialog.is_ok() {
                             let file_path = unoxid_dialog.unwrap().selected_file_path;
                             println!("{:?}", file_path);
